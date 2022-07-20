@@ -16,20 +16,22 @@
   <meta name="author" content="OABern">
   <meta name="keywords" content="java game">
   
-    <meta name="description" content="Dan North, the originator of Behavior-Driven Development wrote this back in 2008:“We decided during the main conference that we should use JUnit 4 and Mockito because we think they are the future of">
+    <meta name="description" content="Dan North, the originator of Behavior-Driven Development wrote this back in 2008: “We decided during the main conference that we should use JUnit 4 and Mockito because we think they are the future of">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mockito">
 <meta property="og:url" content="https://oabern.github.io/posts/201612072734635843/index.html">
 <meta property="og:site_name" content="雨僧">
-<meta property="og:description" content="Dan North, the originator of Behavior-Driven Development wrote this back in 2008:“We decided during the main conference that we should use JUnit 4 and Mockito because we think they are the future of">
+<meta property="og:description" content="Dan North, the originator of Behavior-Driven Development wrote this back in 2008: “We decided during the main conference that we should use JUnit 4 and Mockito because we think they are the future of">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://oabern.github.io/img/post/mockito-20220721003654.jpg">
 <meta property="article:published_time" content="2016-12-07T01:38:00.000Z">
-<meta property="article:modified_time" content="2022-07-18T14:21:11.985Z">
+<meta property="article:modified_time" content="2022-07-20T16:38:58.757Z">
 <meta property="article:author" content="OABern">
-<meta property="article:tag" content="Test">
 <meta property="article:tag" content="JAVA">
+<meta property="article:tag" content="Test">
 <meta property="article:tag" content="Mockito">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://oabern.github.io/img/post/mockito-20220721003654.jpg">
   
   
   
@@ -251,7 +253,7 @@
         
         
         
-          38 分钟
+          76 分钟
         
       </span>
     
@@ -303,22 +305,27 @@
               <div class="markdown-body">
                 
                 <blockquote>
-<p>Dan North, the originator of Behavior-Driven Development wrote this back in 2008:<br>“We decided during the main conference that we should use JUnit 4 and Mockito because we think they are the future of TDD and mocking in Java”</p>
+<p>Dan North, the originator of Behavior-Driven Development wrote this back in 2008:<br>
+“We decided during the main conference that we should use JUnit 4 and Mockito because we think they are the future of TDD and mocking in Java”</p>
 </blockquote>
 <hr>
-<p><strong>说明</strong><br>本文章中的示例使用的开发环境为JDK1.8！<br>Mockito的版本信息如下</p>
+<p><strong>说明</strong><br>
+本文章中的示例使用的开发环境为JDK1.8！<br>
+Mockito的版本信息如下</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.mockito<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mockito-core<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.10.19<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
 <p>文章中的示例部分来自<a target="_blank" rel="noopener" href="https://dzone.com/refcardz/mockito">Mockito Dzone Reference Card</a></p>
-<p><strong>Warning</strong>：文章中的示例只是为了展示Mockito的语法和特性，在实际的测试编码中，我们可能不会使用示例的用法（测试逻辑）！<br>官方原文：</p>
+<p><strong>Warning</strong>：文章中的示例只是为了展示Mockito的语法和特性，在实际的测试编码中，我们可能不会使用示例的用法（测试逻辑）！<br>
+官方原文：</p>
 <blockquote>
 <p>Warning: Note that the examples in this Refcardwere created to demonstrate behaviors of Mockito in a specific context. Of course, when writing the test for your codebase, there is no need to ensure that mocks are stubbed correctly.</p>
 </blockquote>
 <p>鄙人在Github上修改了部分示例，并且写了一些其他的示例（实际测试代码中用法）！<a target="_blank" rel="noopener" href="https://github.com/OAbern/mock-demo">传送门</a></p>
 <hr>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Mockito是一个模拟测试框架。在一个被测试的对象（功能）A中，它通常需要与其他的对象（功能）B进行一些交互，我们把A称作被测试对象（tested object），把B称作协作者（collaborators）。那么在测试环境中，这些协作者都需要被创建，以便被测试对象可以使用它们。为了使测试代码简化以及满足上下文执行环境，我们通常使用测试替身（test double）来代替这些协作者，测试替身看上去和原始的协作者一样，但是却不依赖其他对象，而且可以执行预期行为，记录他们的交互行为（interactions，可以理解成方法调用）</p>
+<h2 id="简介">简介</h2>
+<p>Mockito是一个模拟测试框架。在一个被测试的对象（功能）A中，它通常需要与其他的对象（功能）B进行一些交互，我们把A称作被测试对象（tested object），把B称作协作者（collaborators）。那么在测试环境中，这些协作者都需要被创建，以便被测试对象可以使用它们。为了使测试代码简化以及满足上下文执行环境，我们通常使用测试替身（test double）来代替这些协作者，测试替身看上去和原始的协作者一样，但是却不依赖其他对象，而且可以执行预期行为，记录他们的交互行为（interactions，可以理解成方法调用）</p>
 <hr>
-<h2 id="核心元素"><a href="#核心元素" class="headerlink" title="核心元素"></a>核心元素</h2><p><strong>TDD</strong> : Test-Driven Development</p>
+<h2 id="核心元素">核心元素</h2>
+<p><strong>TDD</strong> : Test-Driven Development</p>
 <p><strong>BDD</strong> : Behavior-Driven Development</p>
 <p><strong>Mock</strong> : 模拟对象，可以理解成Mockito框架帮我们自动生成的数据。通过mock产生的对象有以下的能力：1.可以通过编程产生预期行为；2.在对象的生命周期内可以校验它的交互行为（方法调用）；</p>
 <blockquote>
@@ -335,9 +342,12 @@
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Test_double"><strong>Test Doubles</strong></a>：测试替身，包括5个类型stub，mock，spy，fake，dummy。</p>
 <hr>
-<h2 id="地心历险-待研究"><a href="#地心历险-待研究" class="headerlink" title="地心历险(待研究)"></a>地心历险(待研究)</h2><p>揭示底层的原理</p>
+<h2 id="地心历险-待研究">地心历险(待研究)</h2>
+<p>揭示底层的原理</p>
 <hr>
-<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>编写测试用例，一般分为三个阶段：</p>
+<h2 id="实战">实战</h2>
+<h3 id="1-概述">1. 概述</h3>
+<p>编写测试用例，一般分为三个阶段：</p>
 <table>
 <thead>
 <tr>
@@ -345,7 +355,8 @@
 <th>Responsibility</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>arrange (given)</td>
 <td>SUT and mocks initialization and configuration</td>
 </tr>
@@ -357,45 +368,68 @@
 <td>assert (then)</td>
 <td>The assertion and verification phase</td>
 </tr>
-</tbody></table>
-<p>arrange-act-assert模式对应的语法为：when(<del>).thenXXX(</del>)<br>given-when-then模式(对应BDD形式)对应的语法为：given(<del>).willXXX(</del>)<br>官方大部分DEMO使用given-when-then模式，而且也推荐使用这种模式</p>
+</tbody>
+</table>
+<p>arrange-act-assert模式对应的语法为：when(~).thenXXX(~)<br>
+given-when-then模式(对应BDD形式)对应的语法为：given(~).willXXX(~)<br>
+官方大部分DEMO使用given-when-then模式，而且也推荐使用这种模式</p>
 <blockquote>
 <p>官方原文: given-when-then comments make intentions of tests clearer.</p>
 </blockquote>
-<h3 id="2-简例"><a href="#2-简例" class="headerlink" title="2. 简例"></a>2. 简例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.testng.annotations.Test;<br><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.mockito.Mockito.*;<br><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.testng.Assert.assertEquals;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleStubbingTest</span> &#123;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">TEST_NUMBER_OF_LEAFS</span> <span class="hljs-operator">=</span> <span class="hljs-number">5</span>;<br>  <br>  <span class="hljs-meta">@Test</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">shouldReturnGivenValue</span><span class="hljs-params">()</span> &#123;<br>      <span class="hljs-comment">// arrange</span><br>      <span class="hljs-type">Flower</span> <span class="hljs-variable">flowerMock</span> <span class="hljs-operator">=</span> mock(Flower.class);<br>      when(flowerMock.getNumberOfLeafs()).thenReturn(TEST_NUMBER_OF_LEAFS);<br>  <br>      <span class="hljs-comment">// act</span><br>      <span class="hljs-type">int</span> <span class="hljs-variable">numberOfLeafs</span> <span class="hljs-operator">=</span> flowerMock.getNumberOfLeafs();<br>      <br>      <span class="hljs-comment">// assert</span><br>      assertEquals(numberOfLeafs, TEST_NUMBER_OF_LEAFS);<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
-
+<h3 id="2-简例">2. 简例</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.testng.annotations.Test;<br><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.mockito.Mockito.*;<br><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.testng.Assert.assertEquals;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleStubbingTest</span> &#123;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">TEST_NUMBER_OF_LEAFS</span> <span class="hljs-operator">=</span> <span class="hljs-number">5</span>;<br>  <br>  <span class="hljs-meta">@Test</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">shouldReturnGivenValue</span><span class="hljs-params">()</span> &#123;<br>      <span class="hljs-comment">// arrange</span><br>      <span class="hljs-type">Flower</span> <span class="hljs-variable">flowerMock</span> <span class="hljs-operator">=</span> mock(Flower.class);<br>      when(flowerMock.getNumberOfLeafs()).thenReturn(TEST_NUMBER_OF_LEAFS);<br>  <br>      <span class="hljs-comment">// act</span><br>      <span class="hljs-type">int</span> <span class="hljs-variable">numberOfLeafs</span> <span class="hljs-operator">=</span> flowerMock.getNumberOfLeafs();<br>      <br>      <span class="hljs-comment">// assert</span><br>      assertEquals(numberOfLeafs, TEST_NUMBER_OF_LEAFS);<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.mockito.Mockito.*;<br><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.mockito.BDDMockito.*;<br><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.junit.Assert.*; <br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleStubbingTest</span> &#123;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">TEST_NUMBER_OF_LEAFS</span> <span class="hljs-operator">=</span> <span class="hljs-number">5</span>;<br>  <br>  <span class="hljs-meta">@Test</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">shouldReturnGivenValueUsingBDDSemantics</span><span class="hljs-params">()</span> &#123;<br>      <span class="hljs-comment">//given</span><br>      <span class="hljs-type">Flower</span> <span class="hljs-variable">flowerMock</span> <span class="hljs-operator">=</span> mock(Flower.class);<br>      given(flowerMock.getNumberOfLeafs()).willReturn(TEST_NUMBER_OF_LEAFS);<br>  <br>      <span class="hljs-comment">//when</span><br>      <span class="hljs-type">int</span> <span class="hljs-variable">numberOfLeafs</span> <span class="hljs-operator">=</span> flowerMock.getNumberOfLeafs();<br>      <br>      <span class="hljs-comment">//then</span><br>      assertEquals(numberOfLeafs, TEST_NUMBER_OF_LEAFS);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="3-参数匹配"><a href="#3-参数匹配" class="headerlink" title="3. 参数匹配"></a>3. 参数匹配</h3><p><code>（Argument Matching）</code><br>Mockito默认使用equals()来匹配参数。通常我们需要一个宽范围的参数匹配，Mockito的org.mockito.Matchers类中提供了一套内置的匹配器（Matcher）。<br>代码示例：</p>
+<h3 id="3-参数匹配">3. 参数匹配</h3>
+<p><code>（Argument Matching）</code><br>
+Mockito默认使用equals()来匹配参数。通常我们需要一个宽范围的参数匹配，Mockito的org.mockito.Matchers类中提供了一套内置的匹配器（Matcher）。<br>
+代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">given(plantSearcherMock.smellyMethod(anyInt(), contains(<span class="hljs-string">&quot;asparag&quot;</span>), eq(<span class="hljs-string">&quot;red&quot;</span>))).willReturn(<span class="hljs-literal">true</span>);<br><br><span class="hljs-comment">//given(plantSearcherMock.smellyMethod(anyInt(), contains(&quot;asparag&quot;), &quot;red&quot;)).willReturn(true);</span><br><br><span class="hljs-comment">//incorrect - would throw an exception</span><br></code></pre></td></tr></table></figure>
 <p>如果有一个参数使用了匹配器，则所有的参数必须都使用匹配器，否则将会抛出异常！示例代码中注释掉的部分会抛出异常！</p>
-<p>自定义的参数匹配器需要继承org.mockito.ArgumentMatcher抽象类，并且实现matches方法。然后调用argThat(org.hamcrest.Matcher<T> matcher)方法。<br>代码示例：</p>
+<p>自定义的参数匹配器需要继承org.mockito.ArgumentMatcher抽象类，并且实现matches方法。然后调用argThat(org.hamcrest.Matcher<T> matcher)方法。<br>
+代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java">given(schedulerMock.getNumberOfPlantsScheduledOnDate(<br>  argThat(haveHourFieldEqualTo(<span class="hljs-number">7</span>)))).willReturn(<span class="hljs-number">1</span>);<br><br><span class="hljs-comment">//with the util method to create a matcher</span><br><span class="hljs-keyword">private</span> ArgumentMatcher <span class="hljs-title function_">haveHourFieldEqualTo</span><span class="hljs-params">(<span class="hljs-keyword">final</span> <span class="hljs-type">int</span> hour)</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArgumentMatcher</span>() &#123;<br>  <br>      <span class="hljs-meta">@Override</span><br>      <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">matches</span><span class="hljs-params">(Object argument)</span> &#123;<br>          <span class="hljs-keyword">return</span> ((Date) argument).getHours() == hour;<br>      &#125;<br>  &#125;;<br><br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="4-调用Void方法"><a href="#4-调用Void方法" class="headerlink" title="4. 调用Void方法"></a>4. 调用Void方法</h3><p><code>Stubbing Void Methods</code><br>void Methods 应该使用 willXXX..given 或者 doXXX..when.来进行stubbing<br>代码示例:</p>
+<h3 id="4-调用Void方法">4. 调用Void方法</h3>
+<p><code>Stubbing Void Methods</code><br>
+void Methods 应该使用 willXXX…given 或者 doXXX…when.来进行stubbing<br>
+代码示例:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test(expectedExceptions = WaterException.class)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">shouldStubVoidMethod</span><span class="hljs-params">()</span> &#123;<br><br>  <span class="hljs-type">WaterSource</span> <span class="hljs-variable">waterSourceMock</span> <span class="hljs-operator">=</span> mock(WaterSource.class);<br>  doThrow(WaterException.class).when(waterSourceMock).doSelfCheck();<br><br>  <span class="hljs-comment">//the same with BDD semantics</span><br>  <span class="hljs-comment">//willThrow(WaterException.class).given(waterSourceMock).doSelfCheck();</span><br><br>  waterSourceMock.doSelfCheck();<br><br>  <span class="hljs-comment">//exception expected</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="5-自定义返回器"><a href="#5-自定义返回器" class="headerlink" title="5. 自定义返回器"></a>5. 自定义返回器</h3><p><code>Stubbing With a Custom Answer</code><br>极少的情况会使用自己的处理逻辑来指定预期行为的结果(也就是given..willReturn(Custom Answer)中的Answer).Mockito还是提供了<code>org.mockito.stubbing.Answer&lt;Object&gt;</code>的接口来实现这个功能，你只需实现该接口中的answer方法。</p>
-<p><strong>Warning</strong>：如果需要使用Custom Answer，可能预示着被测代码太复杂，需要重构！<br>官方原文：</p>
+<h3 id="5-自定义返回器">5. 自定义返回器</h3>
+<p><code>Stubbing With a Custom Answer</code><br>
+极少的情况会使用自己的处理逻辑来指定预期行为的结果(也就是given…willReturn(Custom Answer)中的Answer).Mockito还是提供了<code>org.mockito.stubbing.Answer&lt;Object&gt;</code>的接口来实现这个功能，你只需实现该接口中的answer方法。</p>
+<p><strong>Warning</strong>：如果需要使用Custom Answer，可能预示着被测代码太复杂，需要重构！<br>
+官方原文：</p>
 <blockquote>
 <p>Warning: The need to use a custom answer may indicate that tested code is too complicated and should be re-factored.</p>
 </blockquote>
-<h3 id="6-检验行为"><a href="#6-检验行为" class="headerlink" title="6. 检验行为"></a>6. 检验行为</h3><p><code>（Verifying Behavior）</code><br>在一个mock对象的生命周期内，它会记住本身所有的操作。在被测系统（SUT）中，这些操作应该可以被轻易校验。Mockito中可以使用Mockito.verify(T mock)这个基础形式来进行校验<br>代码示例：</p>
+<h3 id="6-检验行为">6. 检验行为</h3>
+<p><code>（Verifying Behavior）</code><br>
+在一个mock对象的生命周期内，它会记住本身所有的操作。在被测系统（SUT）中，这些操作应该可以被轻易校验。Mockito中可以使用Mockito.verify(T mock)这个基础形式来进行校验<br>
+代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">WaterSourcewaterSourceMock = mock(WaterSource.class);<br><br>waterSourceMock.doSelfCheck();<br><br>verify(waterSourceMock).doSelfCheck();      <span class="hljs-comment">//默认校验一次调用</span><br></code></pre></td></tr></table></figure>
-
 <p>Mockito提供了一些有意义的校验模式，你也可以创建自定义校验模式</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">verify(waterSourceMock,never()).doSelfCheck();<br><br>verify(waterSourceMock,times(<span class="hljs-number">2</span>)).getWaterPressure();<br><br>verify(waterSourceMock,atLeast(<span class="hljs-number">1</span>)).getWaterTemperature();<br></code></pre></td></tr></table></figure>
-<h3 id="7-校验调用顺序"><a href="#7-校验调用顺序" class="headerlink" title="7. 校验调用顺序"></a>7. 校验调用顺序</h3><p><code>（Verifying Call Order）</code><br>Mockito可以让你校验调用的顺序，你可以创建一组mocks，然后在组内校验所有的调用顺序。<br>代码示例：</p>
+<h3 id="7-校验调用顺序">7. 校验调用顺序</h3>
+<p><code>（Verifying Call Order）</code><br>
+Mockito可以让你校验调用的顺序，你可以创建一组mocks，然后在组内校验所有的调用顺序。<br>
+代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">shouldVerifyInOrderThroughDifferentMocks</span><span class="hljs-params">()</span>&#123;<br><br>  WaterSourcewaterSource1=mock(WaterSource.class);<br>  WaterSourcewaterSource2=mock(WaterSource.class);<br><br>  waterSource1.doSelfCheck();<br>  waterSource2.getWaterPressure();<br>  waterSource1.getWaterTemperature();<br><br>  InOrderinOrder=inOrder(waterSource1,waterSource2);<br>  inOrder.verify(waterSource1).doSelfCheck();<br>  inOrder.verify(waterSource2).getWaterPressure();<br>  inOrder.verify(waterSource1).getWaterTemperature();<br><br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="8-真实调用"><a href="#8-真实调用" class="headerlink" title="8. 真实调用"></a>8. 真实调用</h3><p><code>Spying on Real Objects</code><br>在Mockito中，你可以使用真实的对象来代替mock，从而使部分方法可以stubbed。通常我们不需要使用spy一个真实的对象，这可能是代码异味（code smell）的信号。但在一些特殊的情况下（比如使用了遗留代码，或者IOC容器），纯mock对象可能不能进行测试。<br>代码示例：</p>
+<h3 id="8-真实调用">8. 真实调用</h3>
+<p><code>Spying on Real Objects</code><br>
+在Mockito中，你可以使用真实的对象来代替mock，从而使部分方法可以stubbed。通常我们不需要使用spy一个真实的对象，这可能是代码异味（code smell）的信号。但在一些特殊的情况下（比如使用了遗留代码，或者IOC容器），纯mock对象可能不能进行测试。<br>
+代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">shouldStubMethodAndCallRealNotStubbedMethod</span><span class="hljs-params">()</span> &#123;<br><br>  <span class="hljs-type">Flower</span> <span class="hljs-variable">realFlower</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Flower</span>();<br>  realFlower.setNumberOfLeafs(ORIGINAL_NUMBER_OF_LEAFS);<br>  FlowerflowerSpy=spy(realFlower);<br>  willDoNothing().given(flowerSpy).setNumberOfLeafs(anyInt());<br><br>  flowerSpy.setNumberOfLeafs(NEW_NUMBER_OF_LEAFS);  <span class="hljs-comment">//stubbed,and should do nothing</span><br><br>  verify(flowerSpy).setNumberOfLeafs(NEW_NUMBER_OF_LEAFS);<br>  assertEquals(flowerSpy.getNumberOfLeafs(),ORIGINAL_NUMBER_OF_LEAFS);       <span class="hljs-comment">//value was not changed</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
-<p>当使用spy时，必须使用willXXX..given&#x2F; doXXX..的形式来stubbing，它可以在stub期间防止真实方法方法被调用</p>
-<p><strong>Warning</strong>：当使用spy时，Mockito创建了真实对象的一份拷贝，因此所有的交互行为应该被传递到被创建的spy对象上<br>官方原文：</p>
+<p>当使用spy时，必须使用willXXX…given/ doXXX…的形式来stubbing，它可以在stub期间防止真实方法方法被调用</p>
+<p><strong>Warning</strong>：当使用spy时，Mockito创建了真实对象的一份拷贝，因此所有的交互行为应该被传递到被创建的spy对象上<br>
+官方原文：</p>
 <blockquote>
 <p>Warning: While spying, Mockito creates a copy of a real object, and therefore all interactions should be passed using the created spy.</p>
 </blockquote>
-<h3 id="9-注解"><a href="#9-注解" class="headerlink" title="9. 注解"></a>9. 注解</h3><p><code>Annotations</code><br>Mockito提供三个注解来简化用静态方法创建mock对象的工作 – @Mock, @Spy, @Captor；注解@InjectMocks可以简化mock和spy对象的注入，它可以通过构造器注入，setter方法注入，field赋值注入。</p>
+<h3 id="9-注解">9. 注解</h3>
+<p><code>Annotations</code><br>
+Mockito提供三个注解来简化用静态方法创建mock对象的工作 – @Mock, @Spy, @Captor；注解@InjectMocks可以简化mock和spy对象的注入，它可以通过构造器注入，setter方法注入，field赋值注入。</p>
 <p>使用注解的功能要调用MockitoAnnotations.initMocks(testClass)（通常在@Before的方法中调用），或者使用MockitoJUnit4Runner来作为junit runner</p>
 <p>代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//with constructor: PlantWaterer(WaterSource waterSource,</span><br><span class="hljs-comment">// WateringScheduler wateringScheduler) &#123;...&#125;</span><br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MockInjectingTest</span> &#123;<br><br>  <span class="hljs-meta">@Mock</span><br>  <span class="hljs-keyword">private</span> WaterSource waterSourceMock;<br><br>  <span class="hljs-meta">@Spy</span><br>  <span class="hljs-keyword">private</span> WateringScheduler wateringSchedulerSpy;<br><br>  <span class="hljs-meta">@InjectMocks</span><br>  <span class="hljs-keyword">private</span> PlantWaterer plantWaterer;<br><br>  <span class="hljs-meta">@BeforeMethod</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span> &#123;<br>      MockitoAnnotations.initMocks(<span class="hljs-built_in">this</span>);<br>  &#125;<br><br>  <span class="hljs-meta">@Test</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">shouldInjectMocks</span><span class="hljs-params">()</span> &#123;<br>      assertNotNull(plantWaterer.getWaterSource());<br>      assertNotNull(plantWaterer.getWateringScheduler());<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
-
 <table>
 <thead>
 <tr>
@@ -403,7 +437,8 @@
 <th>Responsibility</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>@Mock</td>
 <td>Creates a mock of a given type</td>
 </tr>
@@ -419,8 +454,10 @@
 <td>@InjectMocks</td>
 <td>Creates an object of a given type and injects mocks and spies existing in a test</td>
 </tr>
-</tbody></table>
-<h3 id="10-修改默认返回值"><a href="#10-修改默认返回值" class="headerlink" title="10. 修改默认返回值"></a>10. 修改默认返回值</h3><p><code>（Changing the Mock Default Return Value）</code></p>
+</tbody>
+</table>
+<h3 id="10-修改默认返回值">10. 修改默认返回值</h3>
+<p><code>（Changing the Mock Default Return Value）</code></p>
 <p>Mockito使我们可以选择生成mock对象的默认值</p>
 <table>
 <thead>
@@ -429,7 +466,8 @@
 <th>Description</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>RETURNS_DEFAULTS</td>
 <td>Returns a default “empty” value (e.g., null, 0, false, empty collection) - used by default</td>
 </tr>
@@ -449,15 +487,20 @@
 <td>CALLS_REAL_METHODS</td>
 <td>Call a real method of spied object</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <blockquote>
 <p>mock(clazz, Mockito.${Default Answer})</p>
 </blockquote>
-<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>依照本人的理解，在真正编写测试代码时，我们应该分清当前单元测试的目的，以及它所依赖的方法调用。然后在given阶段，mock各种依赖的对象，并且stub各种依赖对象的预期行为；when阶段进行测试目的的执行，也就是测试对象真实的调用行为；then阶段进行verify和assert。</p>
+<h3 id="Tips">Tips</h3>
+<p>依照本人的理解，在真正编写测试代码时，我们应该分清当前单元测试的目的，以及它所依赖的方法调用。然后在given阶段，mock各种依赖的对象，并且stub各种依赖对象的预期行为；when阶段进行测试目的的执行，也就是测试对象真实的调用行为；then阶段进行verify和assert。</p>
 <hr>
-<h2 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h2><p>引用官方说明:<br><strong>Limitations</strong></p>
+<h2 id="局限性">局限性</h2>
+<p>引用官方说明:<br>
+<strong>Limitations</strong></p>
 <ul>
-<li>Mockito has a few limitations worth remembering. They are generally technical restrictions, but Mockito authors believe using hacks to work around them would encourage people to write poorly testable code. <strong>Mockito cannot</strong> :<ul>
+<li>Mockito has a few limitations worth remembering. They are generally technical restrictions, but Mockito authors believe using hacks to work around them would encourage people to write poorly testable code. <strong>Mockito cannot</strong> :
+<ul>
 <li>mock final classes</li>
 <li>mock enums</li>
 <li>mock final methods</li>
@@ -467,7 +510,12 @@
 </ul>
 </li>
 </ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://github.com/OAbern/mock-demo">鄙人编写的代码示例</a>（部分来自官网示例，适量修改，并添加额外的示例）<br><a target="_blank" rel="noopener" href="http://mockito.org/">Mockito官网</a><br><a target="_blank" rel="noopener" href="https://github.com/mockito/mockito">Mockito On Github</a><br><a target="_blank" rel="noopener" href="https://dzone.com/refcardz/mockito">Mockito Dzone Reference Card</a><br><a target="_blank" rel="noopener" href="http://stackoverflow.com/documentation/mockito/2055/introduction-to-mockito#t=201608090656397575575">Introduction to mockito</a></p>
+<h2 id="参考资料">参考资料</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/OAbern/mock-demo">鄙人编写的代码示例</a>（部分来自官网示例，适量修改，并添加额外的示例）<br>
+<a target="_blank" rel="noopener" href="http://mockito.org/">Mockito官网</a><br>
+<a target="_blank" rel="noopener" href="https://github.com/mockito/mockito">Mockito On Github</a><br>
+<a target="_blank" rel="noopener" href="https://dzone.com/refcardz/mockito">Mockito Dzone Reference Card</a><br>
+<a target="_blank" rel="noopener" href="http://stackoverflow.com/documentation/mockito/2055/introduction-to-mockito#t=201608090656397575575">Introduction to mockito</a></p>
 
                 
               </div>
@@ -508,9 +556,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Test/">#Test</a>
-      
         <a href="/tags/JAVA/">#JAVA</a>
+      
+        <a href="/tags/Test/">#Test</a>
       
         <a href="/tags/Mockito/">#Mockito</a>
       
@@ -576,6 +624,12 @@
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/posts/201608033265830174/" title="北京工业大学公开课：摄影的实用性与艺术性漫谈">
+                        <span class="hidden-mobile">北京工业大学公开课：摄影的实用性与艺术性漫谈</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>

@@ -1,0 +1,12 @@
+# markdown表格颜色
+.markdown-body table thead tr {
+  background-color: #767C6B
+}
+
+.markdown-body table tbody tr {
+  background-color: transparent
+}
+
+.markdown-body table tbody tr:nth-child(2n) {
+  background-color: #B2B5AA
+}

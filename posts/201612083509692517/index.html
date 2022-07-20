@@ -16,20 +16,22 @@
   <meta name="author" content="OABern">
   <meta name="keywords" content="java game">
   
-    <meta name="description" content="说明本文使用的开发环境为JDK1.8。本文使用的框架版本 1234567891011121314151617181920212223242526272829&lt;!-- junit --&gt;&lt;dependency&gt;  &lt;groupId&gt;junit&lt;&#x2F;groupId&gt;  &lt;artifactId&gt;junit&lt;&#x2F;artifactId&gt;">
+    <meta name="description" content="说明 本文使用的开发环境为JDK1.8。 本文使用的框架版本 1234567891011121314151617181920212223242526272829&lt;!-- junit --&gt;&lt;dependency&gt;  &lt;groupId&gt;junit&lt;&#x2F;groupId&gt;  &lt;artifactId&gt;junit&lt;&#x2F;artifactId&gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PowerMock">
 <meta property="og:url" content="https://oabern.github.io/posts/201612083509692517/index.html">
 <meta property="og:site_name" content="雨僧">
-<meta property="og:description" content="说明本文使用的开发环境为JDK1.8。本文使用的框架版本 1234567891011121314151617181920212223242526272829&lt;!-- junit --&gt;&lt;dependency&gt;  &lt;groupId&gt;junit&lt;&#x2F;groupId&gt;  &lt;artifactId&gt;junit&lt;&#x2F;artifactId&gt;">
+<meta property="og:description" content="说明 本文使用的开发环境为JDK1.8。 本文使用的框架版本 1234567891011121314151617181920212223242526272829&lt;!-- junit --&gt;&lt;dependency&gt;  &lt;groupId&gt;junit&lt;&#x2F;groupId&gt;  &lt;artifactId&gt;junit&lt;&#x2F;artifactId&gt;">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://oabern.github.io/img/post/powermock.png">
 <meta property="article:published_time" content="2016-12-08T06:11:00.000Z">
-<meta property="article:modified_time" content="2022-07-14T16:17:20.195Z">
+<meta property="article:modified_time" content="2022-07-20T16:41:12.410Z">
 <meta property="article:author" content="OABern">
-<meta property="article:tag" content="Test">
 <meta property="article:tag" content="JAVA">
+<meta property="article:tag" content="Test">
 <meta property="article:tag" content="PowerMock">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://oabern.github.io/img/post/powermock.png">
   
   
   
@@ -251,7 +253,7 @@
         
         
         
-          19 分钟
+          38 分钟
         
       </span>
     
@@ -302,70 +304,96 @@
             
               <div class="markdown-body">
                 
-                <p><strong>说明</strong><br>本文使用的开发环境为JDK1.8。<br>本文使用的框架版本</p>
+                <p><strong>说明</strong><br>
+本文使用的开发环境为JDK1.8。<br>
+本文使用的框架版本</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- junit --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>junit<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>junit<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.12<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>    <br><span class="hljs-comment">&lt;!-- Mockito 2016.8.8目前1.*为稳定版 2.*为beta --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.mockito<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mockito-core<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.10.19<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- PowerMock  --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.powermock<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>powermock-module-junit4<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.6.4<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.powermock<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>powermock-api-mockito<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.6.4<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <p>关于PowerMock的版本兼容问题，<a target="_blank" rel="noopener" href="https://github.com/jayway/powermock/wiki/MockitoUsage#supported-versions">点击这里查看</a></p>
 <hr>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>PowerMock可以支持EasyMock和Mockito，作为Mockito的扩展，使用PowerMock可以mock private方法，mock static方法，mock final方法，mock construction方法。PowerMock封装了部分Mockito的API，可以使用Mockito的语法来进行测试代码的编写。</p>
-<p>Basically, PowerMock provides a class called “PowerMockito” for creating mock&#x2F;object&#x2F;class and initiating verification, and expectations, everything else you can still use Mockito to setup and verify expectation (e.g. times(), anyInt()).</p>
+<h2 id="简介-3">简介</h2>
+<p>PowerMock可以支持EasyMock和Mockito，作为Mockito的扩展，使用PowerMock可以mock private方法，mock static方法，mock final方法，mock construction方法。PowerMock封装了部分Mockito的API，可以使用Mockito的语法来进行测试代码的编写。</p>
+<p>Basically, PowerMock provides a class called “PowerMockito” for creating mock/object/class and initiating verification, and expectations, everything else you can still use Mockito to setup and verify expectation (e.g. times(), anyInt()).</p>
 <p>All usages require @RunWith(PowerMockRunner.class) and @PrepareForTest annotated at class level.</p>
 <hr>
-<h2 id="核心元素"><a href="#核心元素" class="headerlink" title="核心元素"></a>核心元素</h2><p>核心的关键词或者关键知识点</p>
+<h2 id="核心元素-3">核心元素</h2>
+<p>核心的关键词或者关键知识点</p>
 <hr>
-<h2 id="地心历险（TODO）"><a href="#地心历险（TODO）" class="headerlink" title="地心历险（TODO）"></a>地心历险（TODO）</h2><p>揭示底层的原理</p>
+<h2 id="地心历险（TODO）">地心历险（TODO）</h2>
+<p>揭示底层的原理</p>
 <hr>
-<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><ul>
-<li><p>在使用PowerMock时，必须将@RunWith(PowerMockRunner.class) and @PrepareForTest注解到类级别上</p>
+<h2 id="实战-3">实战</h2>
+<h3 id="Tips-2">Tips</h3>
+<ul>
+<li>
+<p>在使用PowerMock时，必须将@RunWith(PowerMockRunner.class) and @PrepareForTest注解到类级别上</p>
 </li>
-<li><p>关于Argument Matcher的使用与Mockito中类似，此处不再赘述！</p>
+<li>
+<p>关于Argument Matcher的使用与Mockito中类似，此处不再赘述！</p>
 </li>
-<li><p>在下面的示例中我们没有使用 ‘import static’，以便大家更好的理解方法属于Mockito还是PowerMockito。但是我们强烈建议你在实际编写测试代码中使用‘import static’，这样的可读性更好！<br>官方原文：</p>
+<li>
+<p>在下面的示例中我们没有使用 ‘import static’，以便大家更好的理解方法属于Mockito还是PowerMockito。但是我们强烈建议你在实际编写测试代码中使用‘import static’，这样的可读性更好！<br>
+官方原文：</p>
+</li>
+</ul>
 <blockquote>
 <p>In the examples below we don’t use static imports for the method in the Mockito or PowerMockito API for better understanding of where the methods are located. However we strongly encourage you to statically import the methods in your real test cases for improved readability.</p>
 </blockquote>
-</li>
-</ul>
-<p>个人建议:由于PowerMock封装了Mockito的API，所以同时引入两个框架的static method可能会造成编译器不知道调用哪个方法。因此在使用PowerMock相关的API时，通过‘import static’引入PowerMock相关的static method，而不引入Mockito的static method，通过‘Mockito.staticMthod()’显示调用Mockito的相关API。**[tbd]**</p>
+<p>个人建议:由于PowerMock封装了Mockito的API，所以同时引入两个框架的static method可能会造成编译器不知道调用哪个方法。因此在使用PowerMock相关的API时，通过‘import static’引入PowerMock相关的static method，而不引入Mockito的static method，通过‘Mockito.staticMthod()’显示调用Mockito的相关API。<strong>[tbd]</strong></p>
 <ul>
 <li>下面的示例代码只是为了展示PowerMock的用法，其中的测试方法（逻辑）可能并不适用于真实的测试代码编写工作！</li>
 </ul>
-<h3 id="1-Static-Method"><a href="#1-Static-Method" class="headerlink" title="1. Static Method"></a>1. Static Method</h3><h4 id="1-1-Mock-amp-Stubbing"><a href="#1-1-Mock-amp-Stubbing" class="headerlink" title="1.1 Mock &amp; Stubbing"></a>1.1 Mock &amp; Stubbing</h4><p>分为两个步骤：<br>1.调用PowerMockito.mockStatic()来mock一个静态类（如果要mock某个特定的方法，可以使用PowerMockito.spy(class)）；</p>
+<h3 id="1-Static-Method">1. Static Method</h3>
+<h4 id="1-1-Mock-Stubbing">1.1 Mock &amp; Stubbing</h4>
+<p>分为两个步骤：<br>
+1.调用PowerMockito.mockStatic()来mock一个静态类（如果要mock某个特定的方法，可以使用PowerMockito.spy(class)）；</p>
 <p>2.使用Mockito.when()进行stub；</p>
 <p>代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">PowerMockito.mockStatic(Static.class);<br>Mockito.when(Static.firstStaticMethod(param)).thenReturn(value);<br></code></pre></td></tr></table></figure>
-
-<h4 id="1-2-Verify"><a href="#1-2-Verify" class="headerlink" title="1.2 Verify"></a>1.2 Verify</h4><p>检验行为分成两步：<br>1.首先调用PowerMockito.verifyStatic()开始校验动作</p>
+<h4 id="1-2-Verify">1.2 Verify</h4>
+<p>检验行为分成两步：<br>
+1.首先调用PowerMockito.verifyStatic()开始校验动作</p>
 <p>2.然后调用你想要校验的静态方法</p>
 <p>代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">PowerMockito.verifyStatic(); <span class="hljs-comment">// default times is once</span><br>Static.firstStaticMethod(param); <span class="hljs-comment">// 2</span><br></code></pre></td></tr></table></figure>
-<p><strong>important</strong><br>每一个静态方法的校验前，都应该调用一次verifyStatic()。<br>官方原文：</p>
+<p><strong>important</strong><br>
+每一个静态方法的校验前，都应该调用一次verifyStatic()。<br>
+官方原文：</p>
 <blockquote>
 <p>Important: You need to call verifyStatic() per method verification.</p>
 </blockquote>
-<h4 id="1-3-stub-void-static-method-to-throw-exception"><a href="#1-3-stub-void-static-method-to-throw-exception" class="headerlink" title="1.3 stub void static method to throw exception"></a>1.3 stub void static method to throw exception</h4><p>代码示例：</p>
+<h4 id="1-3-stub-void-static-method-to-throw-exception">1.3 stub void static method to throw exception</h4>
+<p>代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// arrange</span><br>PowerMockito.doThrow(<span class="hljs-keyword">new</span> <span class="hljs-title class_">NullPointerException</span>()).when(StaticExample.class);<br>StaticExample.isVoidStaticMethod();     <span class="hljs-comment">//call the method stubbed to stub</span><br><br><span class="hljs-comment">// act, call the method again</span><br>StaticExample.isVoidStaticMethod();<br></code></pre></td></tr></table></figure>
-
-<p>使用PowerMockito.doThrow(<del>).when(</del>)来stub，并且调用一次你要stub的方法，完成stub！</p>
-<h3 id="2-private-method"><a href="#2-private-method" class="headerlink" title="2. private method"></a>2. private method</h3><p>对于私有方法，需要采用局部模拟（partial mocking）的手段来实现！</p>
-<h4 id="2-1-mock-amp-stub"><a href="#2-1-mock-amp-stub" class="headerlink" title="2.1 mock &amp; stub"></a>2.1 mock &amp; stub</h4><p>先构建spy对象，然后通过PowerMockito.when(underTest, nameOfMethodToMock, ….param).thenXXX()来实现;(会在打桩时产生真实调用)<br>或者采用PowerMockito.doXXX().when(underTest, nameOfMethodToMock, …param)实现；(推荐使用，不会产生任何真实调用)</p>
+<p>使用PowerMockito.doThrow(~).when(~)来stub，并且调用一次你要stub的方法，完成stub！</p>
+<h3 id="2-private-method">2. private method</h3>
+<p>对于私有方法，需要采用局部模拟（partial mocking）的手段来实现！</p>
+<h4 id="2-1-mock-stub">2.1 mock &amp; stub</h4>
+<p>先构建spy对象，然后通过PowerMockito.when(underTest, nameOfMethodToMock, …param).thenXXX()来实现;(会在打桩时产生真实调用)<br>
+或者采用PowerMockito.doXXX().when(underTest, nameOfMethodToMock, …param)实现；(推荐使用，不会产生任何真实调用)</p>
 <p>代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">StaticExample</span> <span class="hljs-variable">staticExampleMock</span> <span class="hljs-operator">=</span> PowerMockito.spy(<span class="hljs-keyword">new</span> <span class="hljs-title class_">StaticExample</span>());<br><span class="hljs-comment">// For private methods use PowerMockito.when</span><br>PowerMockito.doReturn(RETURN_VALUE).when(staticExampleMock,<span class="hljs-string">&quot;isPrivateMethod&quot;</span>,anyInt());<br><span class="hljs-comment">//when(staticExampleMock,&quot;isPrivateMethod&quot;,anyInt()).thenReturn(RETURN_VALUE);</span><br></code></pre></td></tr></table></figure>
-
-<h4 id="2-2-verify"><a href="#2-2-verify" class="headerlink" title="2.2 verify"></a>2.2 verify</h4><p>代码示例：</p>
+<h4 id="2-2-verify">2.2 verify</h4>
+<p>代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">verifyPrivate(staticExampleMock).invoke(<span class="hljs-string">&quot;isPrivateMethod&quot;</span>, anyInt());<br></code></pre></td></tr></table></figure>
-
-<h3 id="3-Constructor"><a href="#3-Constructor" class="headerlink" title="3. Constructor"></a>3. Constructor</h3><h4 id="3-1-mock-amp-stub"><a href="#3-1-mock-amp-stub" class="headerlink" title="3.1 mock &amp; stub"></a>3.1 mock &amp; stub</h4><p>代码示例：</p>
+<h3 id="3-Constructor">3. Constructor</h3>
+<h4 id="3-1-mock-stub">3.1 mock &amp; stub</h4>
+<p>代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">PowerMockito.whenNew(MyClass.class).withNoArguments().thenThrow(<span class="hljs-keyword">new</span> <span class="hljs-title class_">IOException</span>(<span class="hljs-string">&quot;error message&quot;</span>));<br></code></pre></td></tr></table></figure>
-<p>有参数的构造器也有相应的stub，形如whenNew(<del>).withXXX(</del>).thenXXX(~)，可以参见API，此处不赘述！</p>
-<p><strong>Notice</strong>：在@PrepareForTest(Class&lt;?&gt;[] value)中，应该写入调用构造器的方法所属对象的类型！<br>代码示例：</p>
+<p>有参数的构造器也有相应的stub，形如whenNew(~).withXXX(~).thenXXX(~)，可以参见API，此处不赘述！</p>
+<p><strong>Notice</strong>：在@PrepareForTest(Class&lt;?&gt;[] value)中，应该写入调用构造器的方法所属对象的类型！<br>
+代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RunWith(PowerMockRunner.class)</span><br><span class="hljs-meta">@PrepareForTest(X.class)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">XTest</span> &#123;<br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span> &#123;<br>        whenNew(MyClass.class).withNoArguments().thenThrow(<span class="hljs-keyword">new</span> <span class="hljs-title class_">IOException</span>(<span class="hljs-string">&quot;error message&quot;</span>));<br><br>        <span class="hljs-type">X</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">X</span>();<br>        x.y(); <span class="hljs-comment">// y is the method doing &quot;new MyClass()&quot;</span><br><br>        ..<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h4 id="3-2-verify"><a href="#3-2-verify" class="headerlink" title="3.2 verify"></a>3.2 verify</h4><p>代码示例：</p>
+<h4 id="3-2-verify">3.2 verify</h4>
+<p>代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">PowerMockito.verifyNew(MyClass.class).withNoArguments();<br></code></pre></td></tr></table></figure>
-
-<h3 id="4-final-method"><a href="#4-final-method" class="headerlink" title="4. final method"></a>4. final method</h3><p>final method 的mock, stub, verify与普通方法类似，此处不再赘述！</p>
+<h3 id="4-final-method">4. final method</h3>
+<p>final method 的mock, stub, verify与普通方法类似，此处不再赘述！</p>
 <hr>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://github.com/OAbern/mock-demo">鄙人编写的代码示例</a>（部分来自官网示例，适量修改，并添加额外的示例）<br><a target="_blank" rel="noopener" href="https://github.com/jayway/powermock">PowerMock On Github</a><br><a target="_blank" rel="noopener" href="http://my.oschina.net/u/1433482/blog/645155#comment-list">使用PowerMock进行Mock测试</a><br><a target="_blank" rel="noopener" href="http://www.ibm.com/developerworks/cn/java/j-lo-powermock/">PowerMock简介</a></p>
+<h2 id="参考资料-3">参考资料</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/OAbern/mock-demo">鄙人编写的代码示例</a>（部分来自官网示例，适量修改，并添加额外的示例）<br>
+<a target="_blank" rel="noopener" href="https://github.com/jayway/powermock">PowerMock On Github</a><br>
+<a target="_blank" rel="noopener" href="http://my.oschina.net/u/1433482/blog/645155#comment-list">使用PowerMock进行Mock测试</a><br>
+<a target="_blank" rel="noopener" href="http://www.ibm.com/developerworks/cn/java/j-lo-powermock/">PowerMock简介</a></p>
 <hr>
 
                 
@@ -407,9 +435,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Test/">#Test</a>
-      
         <a href="/tags/JAVA/">#JAVA</a>
+      
+        <a href="/tags/Test/">#Test</a>
       
         <a href="/tags/PowerMock/">#PowerMock</a>
       
